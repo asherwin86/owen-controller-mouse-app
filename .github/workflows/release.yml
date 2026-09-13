@@ -1,0 +1,26 @@
+name: Release
+
+# Builds the Windows installer and publishes it as a GitHub Release whenever
+# a version tag is pushed. electron-updater (wired into main.js) checks this
+# repo's releases feed, so pushing a tag here is the entire release process —
+# no local Windows build environment, no manual upload.
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run release:win
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
