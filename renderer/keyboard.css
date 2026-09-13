@@ -1,0 +1,69 @@
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: transparent;
+  font: 14px -apple-system, "Segoe UI", Roboto, sans-serif;
+  overflow: hidden;
+}
+
+#kb {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px;
+  background: rgba(18, 20, 28, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  color: #e8eaf2;
+}
+
+.kb-hint {
+  text-align: center;
+  font-size: 11px;
+  color: #8b90a8;
+  margin-bottom: 2px;
+}
+
+.kb-row {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.kb-key {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 4px;
+  background: #262a3b;
+  border: 1px solid #333850;
+  border-radius: 8px;
+  font-size: 15px;
+  user-select: none;
+  transition: transform 60ms ease, background 60ms ease;
+}
+
+.kb-key.wide { flex: 2.5; }
+
+.kb-key.active {
+  background: #3a3f56;
+  color: #cfd4ff;
+}
+
+.kb-key.selected {
+  background: #4f6df5;
+  color: #fff;
+  border-color: #7d92ff;
+  transform: scale(1.06);
+}
+
+.kb-key.flash {
+  background: #3ecf8e;
+  color: #0b1a12;
+}

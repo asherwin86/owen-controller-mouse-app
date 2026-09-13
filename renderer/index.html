@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Controller Mouse</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>Controller Mouse</h1>
+  <p class="subtitle">Use a gamepad to drive the real Windows cursor.</p>
+
+  <div class="status">
+    <div class="status-row"><span id="daemon-dot" class="dot"></span><span id="daemon-text">Starting…</span></div>
+    <div class="status-row"><span id="pad-dot" class="dot"></span><span id="pad-text">No controller detected</span></div>
+  </div>
+
+  <div class="toggle-row">
+    <label for="enable">Controller mouse enabled</label>
+    <span class="switch">
+      <input type="checkbox" id="enable" checked />
+      <span class="slider-pill"></span>
+    </span>
+  </div>
+
+  <div class="toggle-row">
+    <label for="autokeyboard">Auto-open keyboard in text fields</label>
+    <span class="switch">
+      <input type="checkbox" id="autokeyboard" checked />
+      <span class="slider-pill"></span>
+    </span>
+  </div>
+
+  <fieldset>
+    <legend>Sensitivity</legend>
+    <div class="slider-field">
+      <div class="row"><span>Cursor speed</span><span id="speed-val"></span></div>
+      <input type="range" id="speed" min="0.25" max="3" step="0.05" />
+    </div>
+    <div class="slider-field">
+      <div class="row"><span>Stick deadzone</span><span id="deadzone-val"></span></div>
+      <input type="range" id="deadzone" min="0.05" max="0.4" step="0.01" />
+    </div>
+    <div class="slider-field">
+      <div class="row"><span>Scroll speed</span><span id="scroll-val"></span></div>
+      <input type="range" id="scroll" min="0.25" max="3" step="0.05" />
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Controls</legend>
+    <ul class="legend">
+      <li><span>Left stick</span><span class="key">Move cursor</span></li>
+      <li><span>Right trigger (RT)</span><span class="key">Left click</span></li>
+      <li><span>Left trigger (LT)</span><span class="key">Right click</span></li>
+      <li><span>Right bumper (RB)</span><span class="key">Middle click</span></li>
+      <li><span>Right stick</span><span class="key">Scroll</span></li>
+      <li><span>Start</span><span class="key">Toggle on-screen keyboard</span></li>
+    </ul>
+  </fieldset>
+
+  <button id="open-keyboard" class="ghost-btn">Open on-screen keyboard</button>
+
+  <p class="footer">Closing this window keeps Controller Mouse running in the tray. Use the tray icon to quit.</p>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
