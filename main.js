@@ -10,12 +10,14 @@ let keyboardWin = null;
 let tray = null;
 let daemon = null;
 let daemonReady = false;
+let daemonStatusMessage = 'Starting cursor helper…';
 let quitting = false;
 let mode = 'mouse'; // mirrors the daemon's authoritative mode, reported via its "MODE" lines
 let padConnected = false;
 
 function sendStatus(ok, message) {
   daemonReady = ok;
+  daemonStatusMessage = message;
   win?.webContents.send('daemon-status', { ok, message });
 }
 
@@ -115,7 +117,11 @@ function createWindow() {
   });
   win.loadFile(path.join(__dirname, 'renderer', 'index.html'));
   win.webContents.on('did-finish-load', () => {
-    sendStatus(daemonReady, daemonReady ? 'Connected to Windows cursor.' : 'Starting cursor helper…');
+    // Resend the real last-known status, not a boolean-derived guess — the
+    // daemon can spawn then crash before this window even finishes loading,
+    // and re-deriving from daemonReady alone would mislabel that as "still
+    // starting" forever instead of showing the actual error.
+    sendStatus(daemonReady, daemonStatusMessage);
     sendPadStatus();
     win.webContents.send('mode', mode);
   });
